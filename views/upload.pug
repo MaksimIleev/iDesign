@@ -1,0 +1,44 @@
+
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    title upload
+    link(href='bower_components/bootstrap/dist/css/bootstrap.min.css', rel='stylesheet')
+    link(href='bower_components/bootstrap/dist/css/bootstrap-theme.min.css', rel='stylesheet')
+    link(href='stylesheets/mystyles.css', rel='stylesheet')
+    link(href='stylesheets/admin.css', rel='stylesheet')
+    link(rel='stylesheet', href='./blueimp/Gallery/css/blueimp-gallery.min.css')
+    link(href='bower_components/font-awesome/css/font-awesome.min.css', rel='stylesheet')
+    link(href='stylesheets/bootstrap-social.css', rel='stylesheet')
+    // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+      script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+  body
+    .container.container-fluid
+      #landscapeContent.row.row-content
+        .col-md-12
+          .left-aligned
+            img.img-responsive(src="/admin/img/landscapeMainImage")
+            form(action='/admin/landscapeMainImage', method='POST', enctype='multipart/form-data')
+              input(type='file', name='landscapeMainImage')
+              button#btnSubmit(type="submit") submit
+            .content.content-right.shadow
+
+                form#landscapeContent(name="adduser",method="post",action="/admin/landscapeContent")
+                  input#serviceHeader(type="text", value=data[0].serviceHeader, name="serviceHeader")
+                  input#serviceHeaderContent(type="text", value=data[0].serviceHeaderContent, name="serviceHeaderContent")
+                  input#serviceSubHeader(type="text", value=data[0].serviceSubHeader, name="serviceSubHeader")
+                  .row
+                    .col-md-12
+                    ul(style='list-style:none;')
+                      each val, index in subList
+                          input#subList(type="text", value=subList[index], name="serviceSubList")
+                  button#btnSubmit(type="submit") submit
+
+        button#see-gallery-btn.btn.btn-default(onclick='landscapeGallery()', type='button') See Gallery
+        <div>#{img}</div>
+        form(action='/admin/landscapeImages', method='POST', enctype='multipart/form-data')
+          input(type='file', name='landscapeImage', multiple='')
+          button#btnSubmit(type="submit") submit

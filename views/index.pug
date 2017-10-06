@@ -1,0 +1,324 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    //
+      The above 3 meta tags *must* come first in the head; any other head
+      content must come *after* these tags
+    title iDesign - interior, exterior, pool and landscape design
+    link(href='bower_components/bootstrap/dist/css/bootstrap.min.css', rel='stylesheet')
+    link(href='bower_components/bootstrap/dist/css/bootstrap-theme.min.css', rel='stylesheet')
+    link(href='stylesheets/mystyles.css', rel='stylesheet')
+    link(rel='stylesheet', href='./blueimp/Gallery/css/blueimp-gallery.min.css')
+    link(href='bower_components/font-awesome/css/font-awesome.min.css', rel='stylesheet')
+    link(href='stylesheets/bootstrap-social.css', rel='stylesheet')
+    // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+      script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+  body(data-spy='scroll', data-target='.navbar')
+    #emailModal.modal.fade(role='dialog')
+      .modal-dialog
+        // Modal content
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal') ×
+            h4.modal-title Email Us
+          .modal-body
+            // Login form
+            form.form-inline(role='form', method='get')
+              .form-group-sm
+                input#email.form-control(name='email', type='email', placeholder='Email Address')
+                input#pwd.form-control(name='pwd', type='password', placeholder='Password')
+                input#rememberMe(name='rememberMe', type='checkbox')
+                span(style='color: #222;')  Remember
+                button.btn.btn-info.btn-sm(type='submit') Sign In
+                button.btn.btn-default.btn-sm(type='button', data-dismiss='modal') Cancel
+    #myNavbar.navbar.navbar-inverse.navbar-fixed-top.transparent(role='navigation')
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='#') iDesign
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav.pull-right
+            li
+              a(href='#landscapeContent') Landscape Design
+            li
+              a(href='#poolContent') Pool Design
+            li
+              a(href='#commercialContent') Commercial Design
+            li
+              a(href='#interiorContent') Interior Design
+            li
+              a(href='#videoContent') Videos
+            li
+              a(href='#aboutUs') About Us
+        // /.navbar-collapse
+    // Main jumbotron for a primary marketing message or call to action
+    #homepage-hero.homepage-hero-module
+      .video-container
+        .title-container
+          .headline
+            h1 iDesign
+          .description
+            a(href='mailto:maximileev@gmail.com')
+              .btn.btn-primary.btn-lg
+                i.fa.fa-envelope(aria-hidden='true')
+                |  Email Us
+            a(href='tel:408-472-5915')
+              .btn.btn-warning.btn-lg
+                i.fa.fa-phone(aria-hidden='true')
+                |  Call Us
+        #content.filter
+        video#video.fillWidth(controls='false', muted='', autoplay='', loop='', poster='images/interior/interior1.jpg')
+          source(src='/video/v3.webm', type='video/webm')
+          | 			Your browser does not support the video tag. I suggest you upgrade your browser.
+    .container.container-fluid
+      #landscapeContent.row.row-content
+        .col-md-12
+          .left-aligned
+            img.img-responsive(src="/admin/landscapeMainImage")
+            .content.content-right.shadow
+              h2 #{data[0].serviceHeader}
+              p
+                | #{data[0].serviceHeaderContent}
+              p #{data[0].serviceSubHeader}
+              .row
+                .col-md-12
+                  ul(style='list-style:none;')
+                    each val, index in subList
+                      li #{data[0].serviceSubList[index]}
+
+              button#see-gallery-btn.btn.btn-default(onclick='landscapeGallery()', type='button') See Gallery
+      #commercialContent.row.row-content
+        .col-md-12
+          .right-aligned
+            img.img-responsive(src='images/pool/pool3.jpg')
+            .content.content-left.shadow
+              h2 iDesign On-line
+              p iDesign provides any landscape design on-line in this simple steps:
+              .row
+                .col-md-12
+                  ul(style='list-style:none;')
+                    li You will send us photos and measurements of your property
+                    li You will prepay on-line
+                    li We will discuss details by phone or face time
+                    li You will see a final design on share screen
+                    li
+                      | You will pay in full and we send you all pictures and drawings by mail or electronically
+              button#see-gallery-btn.btn.btn-default(onclick='commercialGallery()', type='button') See Gallery
+      #poolContent.row.row-content
+        .col-md-12
+          .left-aligned
+            img.img-responsive(src='images/pool/pool2.jpg')
+            .content.content-right.shadow
+              h2 iDesign Pools and water features
+              p
+                | iDesign provides any Pool design.and  ponds, grotto, fountains, water-walls and any water features.
+              button#see-gallery-btn.btn.btn-default(onclick='poolGallery()', type='button') See Gallery
+      #interiorContent.row.row-content
+        .col-md-12
+          .right-aligned
+            img.img-responsive(src='images/interior/interior1.jpg')
+            .content.content-left.shadow
+              h2 iDesign Interiors
+              p
+                | IDesign provides Interior Design, remodeling and new construction. Anything from color choice, draperies, to kitchen and bath remodeling and new additions.
+              button#see-gallery-btn.btn.btn-default(onclick='interiorGallery()', type='button') See Gallery
+    // end of container-fluid
+    // The Gallery as lightbox dialog, should be a child element of the document body
+    #blueimp-gallery.blueimp-gallery
+      .slides
+      h3.title
+      a.prev ‹
+      a.next ›
+      a.close ×
+      a.play-pause
+      ol.indicator
+    // LANDSCAPE GALLERY
+    #landscapeGallery
+      a(href='images/landscape/landscape1.jpg', title='Ladscape design1', name='landscapeGallery')
+      a(href='images/landscape/landscape2.jpg', title='Ladscape design2', name='landscapeGallery')
+      a(href='images/landscape/landscape3.jpg', title='Ladscape design3', name='landscapeGallery')
+      a(href='images/landscape/landscape4.jpg', title='Ladscape design4', name='landscapeGallery')
+      a(href='images/landscape/landscape5.jpg', title='Ladscape design5', name='landscapeGallery')
+      a(href='images/landscape/landscape6.jpg', title='Ladscape design6', name='landscapeGallery')
+      a(href='images/landscape/landscape7.jpg', title='Ladscape design7', name='landscapeGallery')
+    // POOL GALLERY
+    #poolGallery
+      a(href='images/pool/pool1.jpg', title='Pool1', name='poolGallery')
+      a(href='images/pool/pool2.jpg', title='Pool2', name='poolGallery')
+      a(href='images/pool/pool3.jpg', title='Pool3', name='poolGallery')
+      a(href='images/pool/pool4.jpg', title='Pool4', name='poolGallery')
+      a(href='images/pool/pool5.jpg', title='Pool5', name='poolGallery')
+      a(href='images/pool/pool6.jpg', title='Pool6', name='poolGallery')
+      a(href='images/pool/pool7.jpg', title='Pool7', name='poolGallery')
+    // COMMERCIAL GALLERY
+    #poolGallery
+      a(href='images/commercial/commer1.jpg', title='Commercial1', name='commercialGallery')
+      a(href='images/commercial/commer2.jpg', title='Commercial2', name='commercialGallery')
+      a(href='images/commercial/commer3.jpg', title='Commercial3', name='commercialGallery')
+      a(href='images/commercial/commer4.jpg', title='Commercial4', name='commercialGallery')
+      a(href='images/commercial/commer5.jpg', title='Commercial5', name='commercialGallery')
+      a(href='images/commercial/commer6.jpg', title='Commercial6', name='commercialGallery')
+      a(href='images/commercial/commer7.jpg', title='Commercial7', name='commercialGallery')
+      a(href='images/commercial/commer8.jpg', title='Commercial8', name='commercialGallery')
+      a(href='images/commercial/commer9.jpg', title='Commercial9', name='commercialGallery')
+      a(href='images/commercial/commer10.jpg', title='Commercial10', name='commercialGallery')
+      a(href='images/commercial/commer11.jpg', title='Commercial11', name='commercialGallery')
+    // INTERIOR GALLERY
+    .container-fluid
+      .row
+        #interiorGallery
+          a(href='images/interior/interior1.jpg', title='Interior 1', name='interiorGallery')
+          a(href='images/interior/interior2.jpg', title='Interior 2', name='interiorGallery')
+          a(href='images/interior/interior3.jpg', title='Interior 3', name='interiorGallery')
+          a(href='images/interior/interior4.jpg', title='Interior 4', name='interiorGallery')
+          a(href='images/interior/interior5.jpg', title='Interior 5', name='interiorGallery')
+          a(href='images/interior/interior6.jpg', title='Interior 6', name='interiorGallery')
+          a(href='images/interior/interior7.jpg', title='Interior 7', name='interiorGallery')
+    .container-fluid
+      #videoContent.row
+        .col-sm-12.col-md-8.col-md-offset-2
+          h2 Video Gallery
+          // The Gallery as inline carousel, can be positioned anywhere on the page
+          #blueimp-video-carousel.blueimp-gallery.blueimp-gallery-controls.blueimp-gallery-carousel
+            .slides
+            h3.title
+            a.prev ‹
+            a.next ›
+            a.play-pause
+    #socialIcons
+      a(href='#')
+        i.fa.fa-google-plus-square.fa-5x
+      a(href='#')
+        i.fa.fa-twitter-square.fa-5x
+      a(href='#')
+        i.fa.fa-youtube-square.fa-5x
+      a(href='#')
+        i.fa.fa-facebook-square.fa-5x
+    #aboutUs.container-fluid
+      .row
+        .col-md-6
+          .box.card-effect
+            h2
+              span About Us
+            p
+              span
+                | iDesign is a full service interior design firm specializing in residential & commercial interior and exterior architecture & design. We strive to make each home, building or space we design as unique as the people it serves. Our interior design team specializes in integrating the elements of a design to make it flow consistently thru the space. We select each individual item to work in the big picture, while always thinking of the end result. Our wide ranging interior design services include but aren’t limited to:
+            div
+              p.hidden.read-more
+                a.button(onclick='expand()') Read More
+              .row
+                .col-sm-12.col-md-6
+                  ul.left-aligned(style='')
+                    li
+                      span plumbing fixture selections & specifications
+                    li
+                      span light fixture selections & specifications
+                    li
+                      span exterior color and material selections
+                    li
+                      span electrical and lighting plans
+                    li
+                      span custom base and trim design
+                    li
+                      span interior space planning
+                    li
+                      span custom cabinetry design
+                    li
+                      span creative tile design
+                    li
+                      span custom door design
+                    li
+                      span faux painting
+                .col-sm-12.col-md-6
+                  ul.left-aligned(style='')
+                    li
+                      span exterior façade design (residential or commercial)
+                    li
+                      span color consultation for interiors and exteriors
+                    li
+                      span furniture & fabric design and selection
+                    li
+                      span furniture space planning
+                    li
+                      span home accessories and art
+                    li
+                      span home theater design
+                    li
+                      span wine cellar design
+                    li
+                      span window coverings
+                    li
+                      span closet design
+            // end of sidebar-box
+          // box card-effect
+        .col-md-6
+          .box.card-effect
+            h2
+              span Experience & Education:
+            p
+              span
+                | iDesign  is a full-service interior design and construction firm with ten years of hands-on experience in a wide variety of residential and commercial projects.
+                br
+                | 								Lead Designer study  interior design program including training in architecture, space planning, interior fixtures, furniture, equipment specifications and finishes (FF&E), furniture and textile history, custom millwork, furniture, lighting and cost estimation.
+          // end of box card-effect
+          .box.card-effect
+            h2
+              span Project Management
+            p
+              span
+                | We provide detailed project architectural drawings, finish selections and specifications for new construction and remodeling projects. By coordinating with the project superintendent, through the project notebook and our unparalleled attention to large and small details, we achieve the end result clients expect.
+          // end of box card-effect
+          .box.card-effect
+            h2
+              span Designer Discounts:
+            p
+              span
+                | In the past ten years we have established strong relationships with our manufacturers and suppliers. This loyalty has given us the ability to supply our clients with quality products and services atdiscounted prices. Our clients are not required to order materials from us and as a result often find our prices to be much more competitive than other stores or outlets, thus saving time and money. We are a one-stop  interior design shop that specializes in all aspects of designing, specifying, quoting, ordering, delivering and installing interior products and materials. Coupled with an original and integrated design, our experience, and superior customer service sets us apart from our competition.
+          // end of box card-effect
+    #footer.row.row-footer.gradient
+      .col-sm-12.col-md-6.center
+        h3 Why hire a designer?
+        blockquote.blockquote
+          p.mb-0
+            | "This is the age of DIY. There are countless television shows, books, big box stores and websites all touting the freedom and cost-savings of Doing it Yourself. But, many times, DIY is simply DIW…Doing it Wrong. On TV, there is the luxury of second takes and post-production editing. You don't have that in real life."
+          footer.blockquote-footer
+            | Quote of my
+            cite(title='Source Title') Designer Friend
+      .col-sm-12.col-md-6.center
+        h3 Contact us to transform your interior space today!
+        h3
+          i.fa.fa-envelope(aria-hidden='true')
+          |  : youremail@adress.com
+        h3
+          i.fa.fa-phone(aria-hidden='true')
+          |  : 408-472-5915
+        #footerIcons
+          p
+            a(href='#')
+              i.fa.fa-google-plus-square.fa-3x
+            a(href='#')
+              i.fa.fa-twitter-square.fa-3x
+            a(href='#')
+              i.fa.fa-youtube-square.fa-3x
+            a(href='#')
+              i.fa.fa-facebook-square.fa-3x
+    // jQuery (necessary for Bootstrap's JavaScript plugins)
+    script(src='bower_components/jquery/dist/jquery.min.js')
+    // Include all compiled plugins (below), or include individual files as needed
+    script(src='bower_components/bootstrap/dist/js/bootstrap.min.js')
+    script(src='javascripts/main.js')
+    script(src='blueimp/Gallery/js/blueimp-gallery.js')
+    script(src='blueimp/Gallery/js/blueimp-gallery-fullscreen.js')
+    script(src='blueimp/Gallery/js/blueimp-gallery-video.js')
+    script(src='blueimp/Gallery/js/blueimp-gallery-youtube.js')
+    script(src='blueimp/Gallery/js/blueimp-gallery-indicator.js')
